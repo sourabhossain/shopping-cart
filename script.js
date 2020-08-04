@@ -7,7 +7,7 @@ function handleProductChange(product, isIncrease) {
     }
 
     document.querySelector("#" + product + "-count").value = productNewCount;
-    
+
     let productTotal = 0;
 
     if (product == "phone") {
@@ -19,6 +19,21 @@ function handleProductChange(product, isIncrease) {
     }
 
     document.querySelector("#" + product + "-total").innerHTML = "$" + productTotal;
+    calculateTotal();
+}
+
+function calculateTotal() {
+    const phoneCount = getInputValue("phone");
+    const caseCount = getInputValue("case");
+
+    const totalPrice = phoneCount * 1219 + caseCount * 59;
+    document.querySelector("#total-price").innerHTML = "$" + totalPrice;
+    
+    const tax = Math.round(totalPrice * 0.15);
+    document.querySelector("#tax-amount").innerHTML = "$" + tax;
+
+    const grandTotal = totalPrice + tax;
+    document.querySelector("#grand-total").innerHTML = "$" + grandTotal;
 }
 
 function getInputValue(product) {
