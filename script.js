@@ -1,12 +1,28 @@
-function handleProductChange(productCount, productTotal, productPrice, isIncrease) {
-    const caseInput = document.querySelector(productCount);
-    const caseCount = parseInt(caseInput.value);
-    const caseNewCount = caseCount + isIncrease;
+function handleProductChange(product, isIncrease) {
+    const productCount = getInputValue(product);
+    const productNewCount = parseInt(productCount) + isIncrease;
 
-    if (caseNewCount == -1) {
+    if (productNewCount == -1) {
         return;
     }
 
-    document.querySelector(productCount).value = caseNewCount;
-    document.querySelector(productTotal).innerHTML = "$" + (caseNewCount * productPrice);
+    document.querySelector("#" + product + "-count").value = productNewCount;
+    
+    let productTotal = 0;
+
+    if (product == "phone") {
+        productTotal = productNewCount * 1219;
+    }
+
+    if (product == "case") {
+        productTotal = productNewCount * 59;
+    }
+
+    document.querySelector("#" + product + "-total").innerHTML = "$" + productTotal;
+}
+
+function getInputValue(product) {
+    const productInput = document.querySelector("#" + product + "-count").value;
+    const productCount = parseInt(productInput);
+    return productInput;
 }
